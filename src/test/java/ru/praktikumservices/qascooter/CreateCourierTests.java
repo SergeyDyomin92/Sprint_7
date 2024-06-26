@@ -44,7 +44,7 @@ public class CreateCourierTests {
     @DisplayName("createExistsCourier")
     @Description("Невозможность создания существующего курьера")
     public void createExistsCourierStatusCode() {
-        Response firstResponse = sendPostRequestV1Courier(courier);
+        sendPostRequestV1Courier(courier);
         Response secondResponse = sendPostRequestV1Courier(courier);
         checkResponseStatusCodeIs(secondResponse, 409);
         checkResponseKeyAndValueAre(secondResponse, "message", "Этот логин уже используется. Попробуйте другой.");
@@ -73,7 +73,7 @@ public class CreateCourierTests {
     @Description("Невозможность создания курьера с уже существующим логином")
     @Issue("QASCOOTER-1")//найдено расхождение реализации с апи-документацией, заведен баг.
     public void createCourierWithExistLogin() {
-        Response firstResponse = sendPostRequestV1Courier(courier);
+        sendPostRequestV1Courier(courier);
         Response secondResponse = sendPostRequestV1Courier(courier
                 .withLogin(courier.getLogin())
                 .withPassword(utils.password)
